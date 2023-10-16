@@ -178,3 +178,20 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION media_livros_por_editora() RETURNS DECIMAL(5,2)
+BEGIN
+    DECLARE total_editoras INT;
+    DECLARE total_livros INT;
+    DECLARE media DECIMAL(5,2);
+    
+    SELECT COUNT(DISTINCT id_editora) INTO total_editoras FROM Livro;
+    SELECT COUNT(*) INTO total_livros FROM Livro;
+    
+    SET media = total_livros / total_editoras;
+    
+    RETURN media;
+END;
+//
+DELIMITER ;
