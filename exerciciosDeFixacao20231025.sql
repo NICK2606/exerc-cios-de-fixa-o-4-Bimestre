@@ -32,3 +32,10 @@ BEGIN
     INSERT INTO Auditoria(data_hora)
     VALUES ('07/07/2022 09:00')
 END;
+
+CREATE TRIGGER apagar_cliente
+BEFORE DELETE ON Clientes FOR EACH ROW
+BEGIN
+    INSERT INTO Audiotoria
+    VALUES CONCAT('Foi tentado apagar um nome')
+END;
