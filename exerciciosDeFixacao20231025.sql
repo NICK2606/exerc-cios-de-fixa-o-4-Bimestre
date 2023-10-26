@@ -58,3 +58,13 @@ BEGIN
 END;
 //
 DELIMITER;
+
+DELIMITER //
+CREATE TRIGGER novo_pedido
+AFTER INSERT ON Pedidos FOR EACH ROW
+BEGIN
+        INSERT INTO Auditoria
+        VALUES CONCAT('Estoque baixo para o produto ')
+END;
+//
+DELIMITER; 
