@@ -47,3 +47,14 @@ BEGIN
         INSERT INTO Auditoria
         VALUES CONCAT(nome.novo, nome.velho);
 END;
+
+DELIMITER //
+CREATE TRIGGER atualizacao_cliente
+BEFORE UPDATE ON Clientes FOR EACH ROW
+BEGIN
+    IF (nome.novo OR nome.velho IS NULL)
+    INSERT INTO Auditoria
+    VALUES CONCAT('O campo do nome não pode ser vazio')
+END;
+//
+DELIMITER;
