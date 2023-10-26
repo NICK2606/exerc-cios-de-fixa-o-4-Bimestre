@@ -39,3 +39,11 @@ BEGIN
     INSERT INTO Audiotoria
     VALUES CONCAT('Foi tentado apagar um nome')
 END;
+
+CREATE TRIGGER mudar_nome_cliente
+AFTER UPDATE ON Clientes FOR EACH ROW
+BEGIN
+    IF nome.novo <> nome.velho THEN
+        INSERT INTO Auditoria
+        VALUES CONCAT(nome.novo, nome.velho);
+END;
